@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { client, createTables} = require('./db');
+const { client, createTables, seed} = require('./db');
 const morgan = require('morgan');
 const express = require('express');
 
@@ -12,8 +12,9 @@ const init = async () => {
     console.log('connected');
     await createTables();
     console.log('tables created')
-
+    await seed();
     
+    app.listen(process.env.PORT);
 }
 
 init();
